@@ -39,7 +39,11 @@
             "prerender": true,
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "cloudinary",
+              "dotenv"
+            ]
           },
           "configurations": {
             "production": {
