@@ -1,0 +1,285 @@
+<section class="py-24 bg-brand-black text-white relative">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-dark to-transparent opacity-50">
+        </div>
+        <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-t from-brand-dark to-transparent opacity-30">
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 z-10 relative">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+            <!-- Info Side -->
+            <div class="flex flex-col gap-12 lg:sticky lg:top-8" *ngIf="contactInfo$ | async as contact">
+                <div>
+                    <span class="text-brand-gold text-sm tracking-[0.2em] font-bold uppercase mb-4 block">Get In
+                        Touch</span>
+                    <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6">KONTAKT</h1>
+                    <p class="text-brand-white/70 text-lg leading-relaxed max-w-lg">
+                        Redo för din nästa tatuering? Fyll i formuläret eller besök studion.
+                        Jag svarar oftast inom 24 timmar.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-brand-gray p-6 rounded-sm border border-brand-gray/30">
+                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">Adress</h3>
+                        <p class="text-white">{{ contact.studio_name }}</p>
+                        <p class="text-white/70">{{ contact.address }}</p>
+                        <p class="text-white/70">{{ contact.city }}</p>
+                    </div>
+                    <div class="bg-brand-gray p-6 rounded-sm border border-brand-gray/30">
+                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">Kontakt</h3>
+                        <a [href]="'mailto:' + contact.email"
+                            class="block text-white hover:text-brand-gold transition-colors mb-1">{{ contact.email
+                            }}</a>
+                        <a [href]="'tel:' + contact.phone"
+                            class="block text-white hover:text-brand-gold transition-colors">{{ contact.phone }}</a>
+                    </div>
+                    <div class="bg-brand-gray p-6 rounded-sm border border-brand-gray/30 col-span-1 md:col-span-2">
+                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">Öppettider</h3>
+                        <p class="text-white">{{ contact.open_hours }}</p>
+                        <p class="text-white/50 text-xs mt-2 italic">Tidsbokning gäller för konsultationer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Side -->
+            <div class="bg-brand-dark p-8 md:p-12 rounded-lg border border-brand-gray/20 shadow-2xl">
+                <h2 class="text-3xl font-serif font-bold text-white mb-8">Skicka förfrågan</h2>
+
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+
+                    <!-- ── Kontaktuppgifter ── -->
+                    <div class="flex flex-col gap-6">
+
+                        <!-- Namn -->
+                        <div class="flex flex-col gap-2">
+                            <p-floatLabel>
+                                <input id="name" type="text" pInputText formControlName="name"
+                                    class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
+                                <label for="name" class="!text-brand-white/50">Namn *</label>
+                            </p-floatLabel>
+                            <small *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+                                class="text-red-400 text-xs">Namn krävs.</small>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex flex-col gap-2">
+                            <p-floatLabel>
+                                <input id="email" type="email" pInputText formControlName="email"
+                                    class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
+                                <label for="email" class="!text-brand-white/50">Email *</label>
+                            </p-floatLabel>
+                            <small *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+                                class="text-red-400 text-xs">Giltig e-postadress krävs.</small>
+                        </div>
+
+                        <!-- Telefon -->
+                        <div class="flex flex-col gap-2">
+                            <p-floatLabel>
+                                <input id="phone" type="tel" pInputText formControlName="phone"
+                                    class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
+                                <label for="phone" class="!text-brand-white/50">Telefon *</label>
+                            </p-floatLabel>
+                            <small *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched"
+                                class="text-red-400 text-xs">Telefonnummer krävs.</small>
+                        </div>
+                    </div>
+
+                    <!-- ── Din tatuering ── -->
+                    <div class="border-t border-brand-gray/30 pt-6 flex flex-col gap-5">
+                        <h3 class="text-brand-gold text-xs font-bold uppercase tracking-[0.2em]">Din tatuering</h3>
+
+                        <!-- Placering -->
+                        <div class="flex flex-col gap-2">
+                            <p-floatLabel>
+                                <input id="placement" type="text" pInputText formControlName="placement"
+                                    class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
+                                <label for="placement" class="!text-brand-white/50">Placering på kroppen *</label>
+                            </p-floatLabel>
+                            <small
+                                *ngIf="contactForm.get('placement')?.invalid && contactForm.get('placement')?.touched"
+                                class="text-red-400 text-xs">Placering krävs.</small>
+                        </div>
+
+                        <!-- Ungefärlig storlek -->
+                        <div class="flex flex-col gap-2">
+                            <p-floatLabel>
+                                <input id="size" type="text" pInputText formControlName="size"
+                                    class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
+                                <label for="size" class="!text-brand-white/50">Ungefärlig storlek (t.ex. 10×10 cm)
+                                    *</label>
+                            </p-floatLabel>
+                            <small *ngIf="contactForm.get('size')?.invalid && contactForm.get('size')?.touched"
+                                class="text-red-400 text-xs">Storlek krävs.</small>
+                        </div>
+
+                        <!-- Motivbeskrivning -->
+                        <div class="flex flex-col gap-2">
+                            <p-floatLabel>
+                                <textarea id="description" rows="5" pInputTextarea formControlName="description"
+                                    class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3"></textarea>
+                                <label for="description" class="!text-brand-white/50">Motivbeskrivning *</label>
+                            </p-floatLabel>
+                            <small
+                                *ngIf="contactForm.get('description')?.invalid && contactForm.get('description')?.touched"
+                                class="text-red-400 text-xs">Beskriv ditt motiv (minst 10 tecken).</small>
+                        </div>
+                    </div>
+
+                    <!-- ── Inspirationsbilder ── -->
+                    <div class="border-t border-brand-gray/30 pt-6 flex flex-col gap-4">
+                        <div>
+                            <h3 class="text-brand-gold text-xs font-bold uppercase tracking-[0.2em] mb-1">
+                                Inspirationsbilder</h3>
+                            <p class="text-brand-white/40 text-xs">Valfritt — max 3 filer. Format: jpg, gif, png, heic,
+                                pdf.</p>
+                        </div>
+
+                        <!-- File list -->
+                        <div *ngIf="inspirationFiles.length > 0" class="flex flex-col gap-2">
+                            <div *ngFor="let file of inspirationFiles; let i = index"
+                                class="flex items-center justify-between bg-brand-gray/50 border border-brand-gray/30 rounded px-4 py-2">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <i [class]="getFileIcon(file) + ' text-brand-gold text-sm flex-shrink-0'"></i>
+                                    <span class="text-white/80 text-sm truncate">{{ file.name }}</span>
+                                    <span class="text-white/30 text-xs flex-shrink-0">{{ formatFileSize(file.size)
+                                        }}</span>
+                                </div>
+                                <button type="button" (click)="removeFile(i)"
+                                    class="text-white/30 hover:text-red-400 transition-colors ml-3 flex-shrink-0">
+                                    <i class="pi pi-times text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Upload button -->
+                        <div *ngIf="inspirationFiles.length < 3">
+                            <label for="file-upload"
+                                class="inline-flex items-center gap-2 cursor-pointer border border-dashed border-brand-gray/50 hover:border-brand-gold/50 text-brand-white/50 hover:text-white transition-all rounded px-5 py-3 text-sm">
+                                <i class="pi pi-upload text-sm"></i>
+                                <span>Välj {{ inspirationFiles.length === 0 ? 'bilder' : 'fler bilder' }}
+                                    ({{ inspirationFiles.length }}/3)</span>
+                            </label>
+                            <input id="file-upload" type="file" multiple accept=".jpg,.jpeg,.gif,.png,.heic,.heif,.pdf"
+                                (change)="onFileSelect($event)" class="hidden" />
+                        </div>
+
+                        <small *ngIf="fileError" class="text-red-400 text-xs">{{ fileError }}</small>
+                    </div>
+
+                    <!-- ── Konsultation ── -->
+                    <div class="border-t border-brand-gray/30 pt-6 flex flex-col gap-4">
+                        <h3 class="text-brand-gold text-xs font-bold uppercase tracking-[0.2em]">
+                            Konsultation <span
+                                class="text-white/40 normal-case tracking-normal font-normal">(obligatoriskt)</span>
+                        </h3>
+
+                        <div class="flex flex-col gap-3">
+
+                            <!-- Ja -->
+                            <div class="flex items-center gap-3">
+                                <p-radiobutton formControlName="consultation" value="yes" inputId="c_yes" />
+                                <label for="c_yes" class="text-white/80 cursor-pointer text-sm leading-snug">
+                                    Ja, jag kan komma på konsultation
+                                </label>
+                            </div>
+
+                            <!-- Ja, specifika tider -->
+                            <div class="flex items-start gap-3">
+                                <p-radiobutton formControlName="consultation" value="specific" inputId="c_specific"
+                                    class="mt-0.5" />
+                                <div class="flex flex-col gap-3">
+                                    <label for="c_specific" class="text-white/80 cursor-pointer text-sm leading-snug">
+                                        Ja, jag kan komma på konsultation men endast specifika tider
+                                    </label>
+
+                                    <!-- Tidval, visas bara om "specific" är valt -->
+                                    @if (showTimeOptions) {
+                                    <div class="flex flex-col gap-2 pl-2 border-l border-brand-gray/30">
+                                        <div class="flex items-center gap-3">
+                                            <p-radiobutton formControlName="consultationTime" value="09:00-09:30"
+                                                inputId="t1" />
+                                            <label for="t1"
+                                                class="text-white/70 text-sm cursor-pointer">9:00–9:30</label>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <p-radiobutton formControlName="consultationTime" value="15:00-15:30"
+                                                inputId="t2" />
+                                            <label for="t2"
+                                                class="text-white/70 text-sm cursor-pointer">15:00–15:30</label>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <p-radiobutton formControlName="consultationTime" value="other"
+                                                inputId="t3" />
+                                            <label for="t3" class="text-white/70 text-sm cursor-pointer">Övrig</label>
+                                        </div>
+                                        <small
+                                            *ngIf="contactForm.get('consultationTime')?.invalid && contactForm.get('consultationTime')?.touched"
+                                            class="text-red-400 text-xs">Välj ett alternativ.</small>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Nej -->
+                            <div class="flex items-center gap-3">
+                                <p-radiobutton formControlName="consultation" value="no" inputId="c_no" />
+                                <label for="c_no" class="text-white/80 cursor-pointer text-sm leading-snug">
+                                    Nej, jag kan ej komma på konsultation
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <small
+                            *ngIf="contactForm.get('consultation')?.invalid && contactForm.get('consultation')?.touched"
+                            class="text-red-400 text-xs">Välj ett alternativ.</small>
+                    </div>
+
+                    <!-- ── Intyg ── -->
+                    <div class="border-t border-brand-gray/30 pt-6 flex flex-col gap-4">
+
+                        <!-- 18 år -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-start gap-3">
+                                <p-checkbox formControlName="age18" [binary]="true" inputId="age18" class="mt-0.5" />
+                                <label for="age18" class="text-white/80 text-sm cursor-pointer leading-snug">
+                                    Jag intygar att jag är 18 år eller äldre. <span class="text-brand-gold">*</span>
+                                </label>
+                            </div>
+                            <small *ngIf="contactForm.get('age18')?.invalid && contactForm.get('age18')?.touched"
+                                class="text-red-400 text-xs pl-7">Du måste vara minst 18 år.</small>
+                        </div>
+
+                        <!-- GDPR -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-start gap-3">
+                                <p-checkbox formControlName="gdpr" [binary]="true" inputId="gdpr" class="mt-0.5" />
+                                <label for="gdpr" class="text-white/80 text-sm cursor-pointer leading-snug">
+                                    Jag godkänner att mina uppgifter sparas och behandlas enligt
+                                    <a routerLink="/gdpr" target="_blank"
+                                        class="text-brand-gold hover:text-white underline underline-offset-2 transition-colors">GDPR</a>.
+                                    <span class="text-brand-gold">*</span>
+                                </label>
+                            </div>
+                            <small *ngIf="contactForm.get('gdpr')?.invalid && contactForm.get('gdpr')?.touched"
+                                class="text-red-400 text-xs pl-7">Du måste godkänna GDPR.</small>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Skicka ── -->
+                    <button pButton type="submit" [label]="isSubmitting ? 'SKICKAR...' : 'SKICKA FÖRFRÅGAN'"
+                        [icon]="isSubmitting ? 'pi pi-spin pi-spinner' : 'pi pi-send'" [disabled]="isSubmitting"
+                        class="p-button-warning !bg-brand-gold !text-black !border-none !font-bold !py-4 hover:!bg-white hover:!text-brand-black transition-all mt-2">
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
