@@ -22,7 +22,7 @@ import { RippleModule } from 'primeng/ripple';
           <a routerLink="/" routerLinkActive="text-brand-gold" [routerLinkActiveOptions]="{exact: true}" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">HOME</a>
           <a routerLink="/gallery" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">BILDER</a>
           <a routerLink="/contact" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">KONTAKT</a>
-          <a href="https://instagram.com" target="_blank" pButton icon="pi pi-instagram" class="p-button-text p-button-rounded text-white hover:text-brand-gold"></a>
+          <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" pButton icon="pi pi-instagram" class="p-button-text p-button-rounded text-white hover:text-brand-gold"></a>
         </nav>
 
         <!-- Mobile Menu Button -->
@@ -46,9 +46,7 @@ import { RippleModule } from 'primeng/ripple';
         </nav>
 
         <div class="mt-auto flex gap-4 pt-8 border-t border-brand-gray/20">
-            <a href="https://instagram.com" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-instagram"></i></a>
-            <a href="#" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-facebook"></i></a>
-            <a href="#" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-tiktok"></i></a>
+            <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-instagram"></i></a>
         </div>
       </div>
     </p-drawer>

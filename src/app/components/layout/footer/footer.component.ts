@@ -20,14 +20,8 @@ import { AsyncPipe } from '@angular/common';
               {{ contact['hero_tagline'] || 'Dark art. Clean lines. Timeless ink.' }}
             </p>
             <div class="flex gap-4 mt-2">
-              <a href="#" class="w-10 h-10 rounded-full bg-brand-gray flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
+              <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-brand-gray flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
                 <i class="pi pi-instagram"></i>
-              </a>
-              <a href="#" class="w-10 h-10 rounded-full bg-brand-gray flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
-                <i class="pi pi-tiktok"></i>
-              </a>
-              <a href="#" class="w-10 h-10 rounded-full bg-brand-gray flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
-                <i class="pi pi-facebook"></i>
               </a>
             </div>
           </div>
