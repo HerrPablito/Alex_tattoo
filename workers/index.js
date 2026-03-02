@@ -74,30 +74,41 @@ export default {
     // POST /api/contact
     // -------------------------
     if (url.pathname === "/api/contact" && request.method === "POST") {
-      let body;
+      let formData;
       try {
-        body = await request.json();
+        formData = await request.formData();
       } catch {
-        return new Response(JSON.stringify({ error: "Invalid JSON" }), {
+        return new Response(JSON.stringify({ error: "Invalid form data" }), {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders },
         });
       }
 
-      const name = String(body?.name || "").trim();
-      const email = String(body?.email || "").trim();
-      const phone = String(body?.phone || "").trim();
-      const placement = String(body?.placement || "").trim();
-      const size = String(body?.size || "").trim();
-      const description = String(body?.description || "").trim();
-      const consultation = String(body?.consultation || "").trim();
-      const consultationTime = String(body?.consultationTime || "").trim();
+      const name = String(formData.get("name") || "").trim();
+      const email = String(formData.get("email") || "").trim();
+      const phone = String(formData.get("phone") || "").trim();
+      const placement = String(formData.get("placement") || "").trim();
+      const size = String(formData.get("size") || "").trim();
+      const description = String(formData.get("description") || "").trim();
+      const consultation = String(formData.get("consultation") || "").trim();
+      const consultationTime = String(formData.get("consultationTime") || "").trim();
 
       if (!name || !email || !phone || !placement || !size || !description || !consultation) {
         return new Response(JSON.stringify({ error: "Missing fields" }), {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders },
         });
+      }
+
+      // Konvertera uppladdade filer till base64-bilagor för Resend
+      const attachments = [];
+      const fileEntries = formData.getAll("files");
+      for (const entry of fileEntries) {
+        if (entry instanceof File && entry.size > 0) {
+          const buffer = await entry.arrayBuffer();
+          const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+          attachments.push({ filename: entry.name, content: base64 });
+        }
       }
 
       const resp = await fetch("https://api.resend.com/emails", {
@@ -124,6 +135,7 @@ export default {
             <p><strong>Beskrivning:</strong></p>
             <p style="white-space: pre-line">${escapeHtml(description)}</p>
           `,
+          ...(attachments.length > 0 && { attachments }),
         }),
       });
 

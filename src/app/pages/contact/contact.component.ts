@@ -126,7 +126,13 @@ export class ContactComponent implements OnInit {
 
     if (this.contactForm.valid) {
       this.isSubmitting = true;
-      this.http.post('/api/contact', this.contactForm.value).subscribe({
+      const fd = new FormData();
+      Object.entries(this.contactForm.value).forEach(([key, val]) => {
+        fd.append(key, String(val ?? ''));
+      });
+      this.inspirationFiles.forEach(file => fd.append('files', file, file.name));
+
+      this.http.post('/api/contact', fd).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
