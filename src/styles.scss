@@ -64,6 +64,45 @@ h6 {
     white-space: pre-line;
 }
 
+/* PrimeNG Radio & Checkbox — synlighet på mörk bakgrund */
+.p-radiobutton .p-radiobutton-box,
+.p-radiobutton-box {
+    border: 2px solid rgba(245, 245, 245, 0.5) !important;
+    background: transparent !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+}
+
+.p-radiobutton.p-radiobutton-checked .p-radiobutton-box,
+.p-radiobutton-checked .p-radiobutton-box {
+    border-color: #d4af37 !important;
+    background: transparent !important;
+}
+
+.p-radiobutton-checked .p-radiobutton-box .p-radiobutton-icon {
+    background: #d4af37 !important;
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.p-checkbox .p-checkbox-box {
+    border: 2px solid rgba(245, 245, 245, 0.5) !important;
+    background: transparent !important;
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 4px !important;
+}
+
+.p-checkbox.p-checkbox-checked .p-checkbox-box {
+    border-color: #d4af37 !important;
+    background: #d4af37 !important;
+}
+
+.p-checkbox-checked .p-checkbox-box .p-checkbox-icon {
+    color: #0a0a0a !important;
+}
+
 /* Brand Utilities */
 .text-gold {
     color: var(--primary-color);
