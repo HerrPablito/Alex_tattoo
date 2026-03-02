@@ -49,23 +49,20 @@ export default {
 
       const data = await resp.json();
 
-      const _debug = data.resources?.[0]
-        ? { context: data.resources[0].context, metadata: data.resources[0].metadata }
-        : null;
 
       const items = (data.resources || []).map((r) => ({
         publicId: r.public_id,
         url: r.secure_url,
         createdAt: r.created_at,
         tags: r.tags || [],
-        title: r?.context?.custom?.caption || r?.context?.custom?.title || r?.metadata?.title || "",
-        description: r?.context?.custom?.alt || r?.context?.custom?.description || r?.metadata?.description || "",
-        category: r?.context?.custom?.category || r?.metadata?.category || "",
+        title: r?.context?.caption || r?.context?.custom?.caption || "",
+        description: r?.context?.alt || r?.context?.custom?.alt || "",
+        category: r?.context?.category || r?.context?.custom?.category || "",
         width: r.width,
         height: r.height,
       }));
 
-      return new Response(JSON.stringify({ items, _debug }), {
+      return new Response(JSON.stringify({ items }), {
         headers: {
           "Content-Type": "application/json",
           "Cache-Control": "public, max-age=3600",
