@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
 import { SeoService } from '../../services/seo.service';
 import { MessageService } from 'primeng/api';
@@ -43,9 +44,22 @@ export class ContactComponent implements OnInit {
       title: 'Boka tatuering i Göteborg – Kontakt | Alex Tattoo',
       description: 'Boka en tatueringskonsultation i Göteborg eller skicka en förfrågan. Svarar inom 24 timmar.'
     });
+
+    const refUrl = this.route.snapshot.queryParamMap.get('ref');
+    if (refUrl) {
+      fetch(refUrl)
+        .then(r => r.blob())
+        .then(blob => {
+          const filename = refUrl.split('/').pop()?.split('?')[0] || 'referens.jpg';
+          const file = new File([blob], filename, { type: blob.type || 'image/jpeg' });
+          this.inspirationFiles = [file];
+        })
+        .catch(() => {});
+    }
   }
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
+  private route = inject(ActivatedRoute);
   private messageService = inject(MessageService);
 
   contactInfo$ = this.sheetService.getContact();

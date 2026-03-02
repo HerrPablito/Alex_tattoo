@@ -1,6 +1,7 @@
 import { Component, inject, computed, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SeoService } from '../../services/seo.service';
 import { CloudinaryService } from '../../services/cloudinary.service';
 import { DropdownModule } from 'primeng/dropdown';
@@ -63,6 +64,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class GalleryComponent implements OnInit {
   private cloudinaryService = inject(CloudinaryService);
   private seo = inject(SeoService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.seo.update({
@@ -154,5 +156,10 @@ export class GalleryComponent implements OnInit {
   openLightbox(item: GalleryItem) {
     this.selectedImage.set(item);
     this.dialogVisible.set(true);
+  }
+
+  bookSimilar(item: GalleryItem) {
+    this.dialogVisible.set(false);
+    this.router.navigate(['/kontakt'], { queryParams: { ref: item.fullUrl } });
   }
 }
