@@ -21,10 +21,10 @@ export class CloudinaryService {
         if (!this.gallery$) {
             this.loading.set(true);
             this.error.set(null);
-            this.gallery$ = this.http.get<CloudinaryItem[]>('/api/gallery').pipe(
+            this.gallery$ = this.http.get<{ items: CloudinaryItem[] }>('/api/gallery').pipe(
                 timeout(8_000),
                 retry({ count: 2, delay: (_, n) => timer(n * 1_000) }),
-                map(items => items.map(item => ({
+                map(({ items }) => items.map(item => ({
                     publicId: item.publicId,
                     id: item.publicId,
                     title: item.title || 'Untitled',
