@@ -277,8 +277,9 @@
 
                     <!-- ── Skicka ── -->
                     <button pButton type="submit" [label]="isSubmitting ? 'SKICKAR...' : 'SKICKA FÖRFRÅGAN'"
-                        [icon]="isSubmitting ? 'pi pi-spin pi-spinner' : 'pi pi-send'" [disabled]="isSubmitting"
-                        class="p-button-warning !bg-brand-gold !text-black !border-none !font-bold !py-4 hover:!bg-white hover:!text-brand-black transition-all mt-2">
+                        [icon]="isSubmitting ? 'pi pi-spin pi-spinner' : 'pi pi-send'"
+                        [disabled]="isSubmitting || !contactForm.get('age18')?.value || !contactForm.get('gdpr')?.value"
+                        class="p-button-warning !bg-brand-gold !text-black !border-none !font-bold !py-4 hover:!bg-white hover:!text-brand-black transition-all mt-2 disabled:!opacity-40 disabled:!cursor-not-allowed">
                     </button>
 
                 </form>
