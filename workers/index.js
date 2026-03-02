@@ -64,7 +64,7 @@ export default {
       return new Response(JSON.stringify({ items }), {
         headers: {
           "Content-Type": "application/json",
-          "Cache-Control": "public, max-age=60",
+          "Cache-Control": "public, max-age=3600",
           ...corsHeaders,
         },
       });

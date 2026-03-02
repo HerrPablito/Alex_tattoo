@@ -30,8 +30,8 @@ export class CloudinaryService {
                     title: item.title || 'Untitled',
                     description: item.description || '',
                     category: item.tags?.[0] || 'Portfolio',
-                    imageUrl: item.url,
-                    fullUrl: item.fullUrl || item.url,
+                    imageUrl: this.toThumbnail(item.url),
+                    fullUrl: item.url,
                     createdAt: item.createdAt,
                     tags: item.tags
                 }))),
@@ -47,6 +47,11 @@ export class CloudinaryService {
             );
         }
         return this.gallery$!;
+    }
+
+    private toThumbnail(url: string): string {
+        // Infogar Cloudinary-transformationer: 600px bred, auto-format (WebP/AVIF), auto-kvalitet
+        return url.replace('/upload/', '/upload/w_600,c_fill,f_auto,q_auto/');
     }
 
     refresh(): void {
