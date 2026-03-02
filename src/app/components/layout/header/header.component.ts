@@ -47,6 +47,8 @@ import { RippleModule } from 'primeng/ripple';
 
         <div class="mt-auto flex gap-4 pt-8 border-t border-brand-gray/20">
             <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-instagram"></i></a>
+            <a href="https://www.facebook.com/share/18QZXEdzWJ/?mibextid=wwXIfr" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-facebook"></i></a>
+            <a href="https://www.tiktok.com/@axst_tattoos?_r=1&_t=ZN-94Ln8LsEVNu" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-tiktok"></i></a>
         </div>
       </div>
     </p-drawer>
