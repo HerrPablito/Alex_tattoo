@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
 import { SeoService } from '../../services/seo.service';
+import { FormatTextPipe } from '../../pipes/format-text.pipe';
 import { MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextarea } from 'primeng/inputtextarea';
@@ -30,7 +31,8 @@ const MAX_FILES = 3;
     ButtonModule,
     FloatLabel,
     RadioButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    FormatTextPipe
   ],
   templateUrl: './contact.component.html',
   styles: []

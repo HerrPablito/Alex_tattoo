@@ -29,8 +29,8 @@
             style="text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
             GÖTEBORG
         </h4>
-        <p class="google-sheet-text text-xl md:text-2xl text-brand-white/80 font-light tracking-wide max-w-2xl">
-            {{ content.hero_tagline || 'Dark art. Clean lines. Timeless ink.' }}
+        <p class="google-sheet-text text-xl md:text-2xl text-brand-white/80 font-light tracking-wide max-w-2xl"
+            [innerHTML]="(content.hero_tagline || 'Dark art. Clean lines. Timeless ink.') | formatText">
         </p>
         <div class="flex gap-4 mt-8">
             <a routerLink="/kontakt" pButton label="BOKA TID"
@@ -55,12 +55,11 @@
             </div>
             <div class="flex flex-col gap-6">
                 <span class="text-brand-gold text-sm tracking-[0.2em] font-bold uppercase">Artist</span>
-                <h2 class="google-sheet-text text-4xl md:text-5xl font-serif font-bold text-white">
-                    {{ content.about_title || 'Om Alex' }}
+                <h2 class="google-sheet-text text-4xl md:text-5xl font-serif font-bold text-white"
+                    [innerHTML]="(content.about_title || 'Om Alex') | formatText">
                 </h2>
-                <p class="google-sheet-text text-brand-white/70 text-lg leading-relaxed font-light">
-                    {{ content.about_text || 'Alex är en tatuerare specialiserad på blackwork och fineline. Med över 10
-                    års erfarenhet skapar han unika verk som håller livet ut.' }}
+                <p class="google-sheet-text text-brand-white/70 text-lg leading-relaxed font-light"
+                    [innerHTML]="(content.about_text || 'Alex är en tatuerare specialiserad på blackwork och fineline. Med över 10 års erfarenhet skapar han unika verk som håller livet ut.') | formatText">
                 </p>
                 <div class="flex gap-4 mt-4">
                     <p-chip label="Blackwork"

@@ -8,11 +8,12 @@ import { map, take } from 'rxjs/operators';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
 import { CloudinaryService } from '../../services/cloudinary.service';
 import { SeoService } from '../../services/seo.service';
+import { FormatTextPipe } from '../../pipes/format-text.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, AsyncPipe, ButtonModule, ChipModule, ProgressSpinnerModule],
+  imports: [CommonModule, RouterLink, AsyncPipe, ButtonModule, ChipModule, ProgressSpinnerModule, FormatTextPipe],
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {

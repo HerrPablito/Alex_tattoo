@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { GoogleSheetsService } from '../../../services/google-sheets.service';
 import { AsyncPipe } from '@angular/common';
+import { FormatTextPipe } from '../../../pipes/format-text.pipe';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, RouterLink, AsyncPipe],
+  imports: [CommonModule, RouterLink, AsyncPipe, FormatTextPipe],
   template: `
     <footer class="bg-brand-dark border-t border-brand-gray/20 text-brand-white py-12">
       <div class="container mx-auto px-4">
@@ -17,7 +18,7 @@ import { AsyncPipe } from '@angular/common';
           <div class="flex flex-col gap-4">
             <h3 class="text-2xl font-serif font-bold text-white tracking-widest">ALEX TATTOO</h3>
             <p class="text-brand-white/70 max-w-xs leading-relaxed">
-              <span class="google-sheet-text">{{ contact['hero_tagline'] || 'Dark art. Clean lines. Timeless ink.' }}</span>
+              <span class="google-sheet-text" [innerHTML]="(contact['hero_tagline'] || 'Dark art. Clean lines. Timeless ink.') | formatText"></span>
             </p>
             <div class="flex gap-4 mt-2">
               <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-brand-gray flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
@@ -36,7 +37,7 @@ import { AsyncPipe } from '@angular/common';
           <div class="flex flex-col gap-4">
             <h4 class="text-lg font-bold text-brand-gold uppercase tracking-wider">Hitta hit</h4>
             <div class="flex flex-col gap-2 text-brand-white/80">
-              <p class="google-sheet-text">{{ contact.studio_name }}</p>
+              <p class="google-sheet-text" [innerHTML]="contact.studio_name | formatText"></p>
               <p>{{ contact.address }}</p>
               <p>{{ contact.city }}</p>
               <a [href]="'mailto:' + contact.email" class="hover:text-brand-gold transition-colors mt-2 block">{{ contact.email }}</a>
@@ -47,7 +48,7 @@ import { AsyncPipe } from '@angular/common';
           <!-- Opening Hours -->
           <div class="flex flex-col gap-4">
              <h4 class="text-lg font-bold text-brand-gold uppercase tracking-wider">Öppettider</h4>
-             <p class="google-sheet-text text-brand-white/80">{{ contact.open_hours }}</p>
+             <p class="google-sheet-text text-brand-white/80" [innerHTML]="contact.open_hours | formatText"></p>
              <p class="text-brand-white/50 text-sm italic mt-4">Endast tidsbokning.</p>
              
              <div class="mt-4">
