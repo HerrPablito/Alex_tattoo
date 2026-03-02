@@ -102,13 +102,20 @@ export default {
 
       // Konvertera uppladdade filer till base64-bilagor för Resend
       const attachments = [];
-      const fileEntries = formData.getAll("files");
-      for (const entry of fileEntries) {
-        if (entry instanceof File && entry.size > 0) {
-          const buffer = await entry.arrayBuffer();
-          const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
-          attachments.push({ filename: entry.name, content: base64 });
+      try {
+        const fileEntries = formData.getAll("files");
+        for (const entry of fileEntries) {
+          if (entry instanceof File && entry.size > 0) {
+            const buffer = await entry.arrayBuffer();
+            const bytes = new Uint8Array(buffer);
+            let binary = "";
+            for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+            attachments.push({ filename: entry.name, content: btoa(binary) });
+          }
         }
+      } catch (fileErr) {
+        console.error("File processing error:", fileErr);
+        // Fortsätt utan bilagor om något går fel
       }
 
       const resp = await fetch("https://api.resend.com/emails", {
