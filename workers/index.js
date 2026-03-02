@@ -49,6 +49,13 @@ export default {
 
       const data = await resp.json();
 
+      // Debug: logga första resursens rådata för att se exakt vad Cloudinary returnerar
+      if (data.resources?.length > 0) {
+        const sample = data.resources[0];
+        console.log("SAMPLE context:", JSON.stringify(sample.context));
+        console.log("SAMPLE metadata:", JSON.stringify(sample.metadata));
+      }
+
       const items = (data.resources || []).map((r) => ({
         publicId: r.public_id,
         url: r.secure_url,
