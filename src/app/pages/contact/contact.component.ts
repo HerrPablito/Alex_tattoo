@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
 import { SeoService } from '../../services/seo.service';
 import { MessageService } from 'primeng/api';
@@ -44,6 +45,7 @@ export class ContactComponent implements OnInit {
     });
   }
   private fb = inject(FormBuilder);
+  private http = inject(HttpClient);
   private messageService = inject(MessageService);
 
   contactInfo$ = this.sheetService.getContact();
@@ -124,17 +126,27 @@ export class ContactComponent implements OnInit {
 
     if (this.contactForm.valid) {
       this.isSubmitting = true;
-      setTimeout(() => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Tack!',
-          detail: 'Din förfrågan har skickats. Jag återkommer inom 24 timmar.'
-        });
-        this.contactForm.reset();
-        this.inspirationFiles = [];
-        this.fileError = null;
-        this.isSubmitting = false;
-      }, 1500);
+      this.http.post('/api/contact', this.contactForm.value).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Tack!',
+            detail: 'Din förfrågan har skickats. Jag återkommer inom 24 timmar.'
+          });
+          this.contactForm.reset();
+          this.inspirationFiles = [];
+          this.fileError = null;
+          this.isSubmitting = false;
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Något gick fel',
+            detail: 'Kunde inte skicka förfrågan. Försök igen eller kontakta mig direkt.'
+          });
+          this.isSubmitting = false;
+        }
+      });
     } else {
       this.contactForm.markAllAsTouched();
       if (this.showTimeOptions && !timeCtrl?.value) {
