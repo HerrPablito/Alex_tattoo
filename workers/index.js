@@ -49,12 +49,9 @@ export default {
 
       const data = await resp.json();
 
-      // Debug: logga första resursens rådata för att se exakt vad Cloudinary returnerar
-      if (data.resources?.length > 0) {
-        const sample = data.resources[0];
-        console.log("SAMPLE context:", JSON.stringify(sample.context));
-        console.log("SAMPLE metadata:", JSON.stringify(sample.metadata));
-      }
+      const _debug = data.resources?.[0]
+        ? { context: data.resources[0].context, metadata: data.resources[0].metadata }
+        : null;
 
       const items = (data.resources || []).map((r) => ({
         publicId: r.public_id,
@@ -68,7 +65,7 @@ export default {
         height: r.height,
       }));
 
-      return new Response(JSON.stringify({ items }), {
+      return new Response(JSON.stringify({ items, _debug }), {
         headers: {
           "Content-Type": "application/json",
           "Cache-Control": "public, max-age=3600",
