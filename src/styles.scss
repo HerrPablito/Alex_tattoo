@@ -59,6 +59,18 @@ h6 {
     background: #555;
 }
 
+/* Skull loading animation */
+@keyframes skullPulse {
+    0%, 100% { transform: scale(1) rotate(-5deg); opacity: 0.6; }
+    50% { transform: scale(1.15) rotate(5deg); opacity: 1; }
+}
+
+.skull-spin {
+    display: inline-block;
+    animation: skullPulse 1.2s ease-in-out infinite;
+    filter: grayscale(1);
+}
+
 /* Google Sheets content */
 .google-sheet-text {
     white-space: pre-line;
