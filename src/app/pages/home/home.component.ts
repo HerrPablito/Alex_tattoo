@@ -32,13 +32,13 @@ export class HomeComponent implements OnInit {
     map(items => items.slice(0, 6))
   );
 
-  featuredItems = toSignal<GalleryItem[]>(this.featuredGallery$, { initialValue: [] });
+  featuredItems = toSignal(this.featuredGallery$, { initialValue: [] as GalleryItem[] });
 
   lightboxVisible = signal(false);
   lightboxIndex = signal(0);
 
   get lightboxItem(): GalleryItem | null {
-    const items = this.featuredItems();
+    const items = this.featuredItems() ?? [];
     return items[this.lightboxIndex()] ?? null;
   }
 
@@ -48,12 +48,12 @@ export class HomeComponent implements OnInit {
   }
 
   prev(): void {
-    const items = this.featuredItems();
+    const items = this.featuredItems() ?? [];
     this.lightboxIndex.update(i => (i - 1 + items.length) % items.length);
   }
 
   next(): void {
-    const items = this.featuredItems();
+    const items = this.featuredItems() ?? [];
     this.lightboxIndex.update(i => (i + 1) % items.length);
   }
 
