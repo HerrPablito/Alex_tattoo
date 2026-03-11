@@ -13,7 +13,10 @@ export class GoogleSheetsService {
     private readonly apiKey = environment.googleSheetsApiKey;
     private readonly baseUrl = `https://sheets.googleapis.com/v4/spreadsheets/${this.spreadsheetId}/values:batchGet`;
 
+    private readonly valuesUrl = `https://sheets.googleapis.com/v4/spreadsheets/${this.spreadsheetId}/values`;
+
     private siteData$?: Observable<SiteData>;
+    private translations$?: Observable<Record<string, Record<string, string>>>;
     private blockedUntil = 0;
 
     loading = signal(false);
@@ -56,8 +59,7 @@ export class GoogleSheetsService {
             const params = new HttpParams()
                 .set('key', this.apiKey)
                 .append('ranges', 'content!A:B')
-                .append('ranges', 'contact!A:B')
-                .append('ranges', 'translations!A:C');
+                .append('ranges', 'contact!A:B');
 
             return this.http.get<any>(this.baseUrl, { params }).pipe(
                 map((res) => this.mapResponse(res)),
@@ -91,10 +93,29 @@ export class GoogleSheetsService {
 
     refresh(): void {
         this.siteData$ = undefined;
+        this.translations$ = undefined;
     }
 
     getTranslations(): Observable<Record<string, Record<string, string>>> {
-        return this.loadAll().pipe(map((d) => d.translations));
+        if (this.translations$) return this.translations$;
+
+        if (!this.spreadsheetId || !this.apiKey) {
+            this.translations$ = of({}).pipe(shareReplay(1));
+            return this.translations$;
+        }
+
+        const params = new HttpParams()
+            .set('key', this.apiKey);
+
+        this.translations$ = this.http
+            .get<any>(`${this.valuesUrl}/translations!A:C`, { params })
+            .pipe(
+                map((res) => this.mapTranslations(res?.values ?? [])),
+                catchError(() => of({})),
+                shareReplay(1)
+            );
+
+        return this.translations$;
     }
 
     private buildMock(): SiteData {
@@ -111,12 +132,11 @@ export class GoogleSheetsService {
 
         const contentRows = ranges.find((r: any) => r.range.includes('content!'))?.values ?? [];
         const contactRows = ranges.find((r: any) => r.range.includes('contact!'))?.values ?? [];
-        const translationRows = ranges.find((r: any) => r.range.includes('translations!'))?.values ?? [];
 
         return {
             content: this.mapContent(contentRows),
             contact: this.mapContact(contactRows),
-            translations: this.mapTranslations(translationRows),
+            translations: {},
         };
     }
 
