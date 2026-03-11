@@ -73,7 +73,8 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
     this.seo.update({
       title: 'Galleri – Tatueringar i Göteborg | Alex Tattoo',
-      description: 'Se utvalda tatueringar inom blackwork, fineline och custom i Göteborg. Boka din tatuering idag.'
+      description: 'Se utvalda tatueringar inom blackwork, fineline och custom i Göteborg. Boka din tatuering idag.',
+      url: 'https://axst.se/galleri'
     });
   }
 

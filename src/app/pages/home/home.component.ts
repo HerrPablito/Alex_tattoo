@@ -70,8 +70,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.update({
-      title: 'Alex Tattoo – Tatuerare i Göteborg | Blackwork & Fineline',
-      description: 'Professionell tatuerare i Göteborg specialiserad på blackwork och fineline. Boka din konsultation idag.'
+      title: 'Alex Tattoo Göteborg | Blackwork & Fineline – axst.se',
+      description: 'Tatuerare i Göteborg specialiserad på blackwork, fineline och neo-traditionellt. Boka konsultation på axst.se.',
+      url: 'https://axst.se/'
     });
 
     this.sheetService.getContact().pipe(take(1)).subscribe(contact => {

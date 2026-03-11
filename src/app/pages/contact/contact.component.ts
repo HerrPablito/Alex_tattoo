@@ -48,7 +48,8 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
     this.seo.update({
       title: 'Boka tatuering i Göteborg – Kontakt | Alex Tattoo',
-      description: 'Boka en tatueringskonsultation i Göteborg eller skicka en förfrågan. Svarar inom 24 timmar.'
+      description: 'Boka en tatueringskonsultation i Göteborg eller skicka en förfrågan. Svarar inom 24 timmar.',
+      url: 'https://axst.se/kontakt'
     });
 
     const refUrl = this.route.snapshot.queryParamMap.get('ref');
