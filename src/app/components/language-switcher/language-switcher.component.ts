@@ -8,16 +8,16 @@ import { TranslationService, Lang } from '../../services/translation.service';
         <div class="flex items-center gap-1 text-sm font-bold tracking-wider">
             <button (click)="set('sv')"
                 [class]="lang() === 'sv'
-                    ? 'text-brand-gold'
-                    : 'text-white/40 hover:text-white transition-colors'">
-                SV
+                    ? 'flex items-center gap-1 text-brand-gold'
+                    : 'flex items-center gap-1 text-white/40 hover:text-white transition-colors'">
+                <span>🇸🇪</span> SV
             </button>
             <span class="text-white/20">/</span>
             <button (click)="set('en')"
                 [class]="lang() === 'en'
-                    ? 'text-brand-gold'
-                    : 'text-white/40 hover:text-white transition-colors'">
-                EN
+                    ? 'flex items-center gap-1 text-brand-gold'
+                    : 'flex items-center gap-1 text-white/40 hover:text-white transition-colors'">
+                <span>🇬🇧</span> EN
             </button>
         </div>
     `
