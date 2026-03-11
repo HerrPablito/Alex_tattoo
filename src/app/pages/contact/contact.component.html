@@ -134,9 +134,8 @@
                     <div class="border-t border-brand-gray/30 pt-6 flex flex-col gap-4">
                         <div>
                             <h3 class="text-brand-gold text-xs font-bold uppercase tracking-[0.2em] mb-1">
-                                Inspirationsbilder</h3>
-                            <p class="text-brand-white/40 text-xs">Valfritt — max 3 filer. Format: jpg, gif, png, heic,
-                                pdf.</p>
+                                {{ t('form_inspiration_title') }}</h3>
+                            <p class="text-brand-white/40 text-xs">{{ t('form_inspiration_hint') }}</p>
                         </div>
 
                         <!-- File list -->
@@ -161,7 +160,7 @@
                             <label for="file-upload"
                                 class="inline-flex items-center gap-2 cursor-pointer border border-dashed border-brand-gray/50 hover:border-brand-gold/50 text-brand-white/50 hover:text-white transition-all rounded px-5 py-3 text-sm">
                                 <i class="pi pi-upload text-sm"></i>
-                                <span>Välj {{ inspirationFiles.length === 0 ? 'bilder' : 'fler bilder' }}
+                                <span>{{ inspirationFiles.length === 0 ? t('form_choose_images') : t('form_choose_more') }}
                                     ({{ inspirationFiles.length }}/3)</span>
                             </label>
                             <input id="file-upload" type="file" multiple accept=".jpg,.jpeg,.gif,.png,.heic,.heif,.pdf"
@@ -174,8 +173,8 @@
                     <!-- ── Konsultation ── -->
                     <div class="border-t border-brand-gray/30 pt-6 flex flex-col gap-4">
                         <h3 class="text-brand-gold text-xs font-bold uppercase tracking-[0.2em]">
-                            Konsultation <span
-                                class="text-white/40 normal-case tracking-normal font-normal">(obligatoriskt)</span>
+                            {{ t('form_consultation_title') }} <span
+                                class="text-white/40 normal-case tracking-normal font-normal">({{ t('form_required') }})</span>
                         </h3>
 
                         <div class="flex flex-col gap-3">
@@ -184,7 +183,7 @@
                             <div class="flex items-center gap-3">
                                 <p-radiobutton formControlName="consultation" value="yes" inputId="c_yes" />
                                 <label for="c_yes" class="text-white/80 cursor-pointer text-sm leading-snug">
-                                    Ja, jag kan komma på konsultation
+                                    {{ t('form_consult_yes') }}
                                 </label>
                             </div>
 
@@ -194,7 +193,7 @@
                                     class="mt-0.5" />
                                 <div class="flex flex-col gap-3">
                                     <label for="c_specific" class="text-white/80 cursor-pointer text-sm leading-snug">
-                                        Ja, jag kan komma på konsultation men endast specifika tider
+                                        {{ t('form_consult_specific') }}
                                     </label>
 
                                     <!-- Tidval, visas bara om "specific" är valt -->
@@ -229,7 +228,7 @@
                             <div class="flex items-center gap-3">
                                 <p-radiobutton formControlName="consultation" value="no" inputId="c_no" />
                                 <label for="c_no" class="text-white/80 cursor-pointer text-sm leading-snug">
-                                    Nej, jag kan ej komma på konsultation
+                                    {{ t('form_consult_no') }}
                                 </label>
                             </div>
 
@@ -248,7 +247,7 @@
                             <div class="flex items-start gap-3">
                                 <p-checkbox formControlName="age18" [binary]="true" inputId="age18" class="mt-0.5" />
                                 <label for="age18" class="text-white/80 text-sm cursor-pointer leading-snug">
-                                    Jag intygar att jag är 18 år eller äldre. <span class="text-brand-gold">*</span>
+                                    {{ t('form_age18_label') }} <span class="text-brand-gold">*</span>
                                 </label>
                             </div>
                             <small *ngIf="contactForm.get('age18')?.invalid && contactForm.get('age18')?.touched"
@@ -260,7 +259,7 @@
                             <div class="flex items-start gap-3">
                                 <p-checkbox formControlName="gdpr" [binary]="true" inputId="gdpr" class="mt-0.5" />
                                 <label for="gdpr" class="text-white/80 text-sm cursor-pointer leading-snug">
-                                    Jag godkänner att mina uppgifter sparas och behandlas enligt
+                                    {{ t('form_gdpr_label') }}
                                     <a routerLink="/gdpr" target="_blank"
                                         class="text-brand-gold hover:text-white underline underline-offset-2 transition-colors">GDPR</a>.
                                     <span class="text-brand-gold">*</span>

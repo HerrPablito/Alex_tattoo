@@ -64,8 +64,8 @@ import { FormatTextPipe } from '../../../pipes/format-text.pipe';
 
       <!-- Copyright -->
       <div class="border-t border-brand-gray/10 mt-12 pt-8 text-center text-brand-white/30 text-xs flex flex-col items-center gap-2">
-        <p>&copy; {{ currentYear }} Alex Tattoo. Alla rättigheter förbehållna.</p>
-        <a routerLink="/gdpr" class="hover:text-brand-gold transition-colors underline underline-offset-4 text-[10px] uppercase tracking-widest text-brand-white/50">Integritetspolicy (GDPR)</a>
+        <p>&copy; {{ currentYear }} Alex Tattoo. {{ t('footer_copyright') }}</p>
+        <a routerLink="/gdpr" class="hover:text-brand-gold transition-colors underline underline-offset-4 text-[10px] uppercase tracking-widest text-brand-white/50">{{ t('footer_gdpr_link') }}</a>
       </div>
     </footer>
   `
