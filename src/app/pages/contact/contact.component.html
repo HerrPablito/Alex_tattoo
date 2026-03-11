@@ -28,7 +28,7 @@
                         <p class="google-sheet-text text-white" [innerHTML]="contact.studio_name | formatText"></p>
                         <p class="google-sheet-text text-white/70" [innerHTML]="contact.address | formatText"></p>
                         <p class="google-sheet-text text-white/70" [innerHTML]="contact.city | formatText"></p>
-                        <a [href]="'tel:' + contact.phone" class="block text-white hover:text-brand-gold transition-colors">{{ contact.phone }}</a>
+                        <a [href]="'tel:' + contact.phone" class="block text-white/70 hover:text-brand-gold transition-colors">{{ contact.phone }}</a>
                         <a href="https://www.google.com/maps/place/Unikum+Tattoo/@57.6991982,11.9334462,18.52z/data=!4m6!3m5!1s0x464ff369bf52d7ef:0xfc89c65005bf4866!8m2!3d57.6991945!4d11.9339815!16s%2Fg%2F1232khd9b?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="block cursor-pointer hover:opacity-75 transition-opacity">
                             <img src="/images/unikum.jpg" alt="Unikum Studio" class="mt-4 w-full h-40 object-cover rounded-sm border border-brand-gray/30 shadow-lg">
                         </a>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="bg-brand-gray p-6 rounded-sm border border-brand-gray/30 col-span-1 md:col-span-2">
                         <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">Öppettider</h3>
-                        <p class="google-sheet-text text-white" [innerHTML]="contact.open_hours | formatText"></p>
+                        <p class="google-sheet-text text-white" [innerHTML]="t('open_hours') | formatText"></p>
                         <p class="text-white/50 text-xs mt-2 italic">Tidsbokning gäller för konsultationer.</p>
                     </div>
                 </div>

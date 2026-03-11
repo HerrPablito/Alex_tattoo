@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal, HostListener } from '@angular/core';
-import { CommonModule, AsyncPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
@@ -10,23 +10,26 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
 import { CloudinaryService } from '../../services/cloudinary.service';
 import { SeoService } from '../../services/seo.service';
+import { TranslationService } from '../../services/translation.service';
 import { FormatTextPipe } from '../../pipes/format-text.pipe';
 import { GalleryItem } from '../../models/sheets.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, AsyncPipe, ButtonModule, ChipModule, ProgressSpinnerModule, FormatTextPipe, DialogModule],
+  imports: [CommonModule, RouterLink, ButtonModule, ChipModule, ProgressSpinnerModule, FormatTextPipe, DialogModule],
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
   private sheetService = inject(GoogleSheetsService);
   private cloudinaryService = inject(CloudinaryService);
   private seo = inject(SeoService);
+  private translation = inject(TranslationService);
+
+  t = (key: string) => this.translation.t(key);
 
   loading = this.sheetService.loading;
   error = this.sheetService.error;
-  content$ = this.sheetService.getContent();
 
   featuredGallery$ = this.cloudinaryService.getGallery().pipe(
     map(items => items.slice(0, 6))

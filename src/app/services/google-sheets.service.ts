@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, defer } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { ContactInfo, SheetContent, SiteData } from '../models/sheets.model';
+import { ContactInfo, SiteData } from '../models/sheets.model';
 
 @Injectable({ providedIn: 'root' })
 export class GoogleSheetsService {
@@ -21,14 +21,6 @@ export class GoogleSheetsService {
 
     loading = signal(false);
     error = signal<string | null>(null);
-
-    private mockContent: SheetContent = {
-        hero_tagline: 'Dark art. Clean lines. Timeless ink.',
-        about_title: 'Om Alex',
-        about_text:
-            'Alex är en tatuerare specialiserad på blackwork och fineline. Med över 10 års erfarenhet skapar han unika verk som håller livet ut.',
-        cta_text: 'Boka din tid idag',
-    };
 
     private mockContact: ContactInfo = {
         studio_name: 'Alex Tattoo Studio',
@@ -58,7 +50,6 @@ export class GoogleSheetsService {
 
             const params = new HttpParams()
                 .set('key', this.apiKey)
-                .append('ranges', 'content!A:B')
                 .append('ranges', 'contact!A:B');
 
             return this.http.get<any>(this.baseUrl, { params }).pipe(
@@ -81,10 +72,6 @@ export class GoogleSheetsService {
         });
 
         return this.siteData$;
-    }
-
-    getContent(): Observable<SheetContent> {
-        return this.loadAll().pipe(map((d) => d.content));
     }
 
     getContact(): Observable<ContactInfo> {
@@ -120,7 +107,6 @@ export class GoogleSheetsService {
 
     private buildMock(): SiteData {
         return {
-            content: this.mockContent,
             contact: this.mockContact,
             translations: {},
         };
@@ -128,13 +114,11 @@ export class GoogleSheetsService {
 
     private mapResponse(res: any): SiteData {
         const ranges = res?.valueRanges;
-        if (!ranges || ranges.length < 2) throw new Error('Invalid Sheets response');
+        if (!ranges || ranges.length < 1) throw new Error('Invalid Sheets response');
 
-        const contentRows = ranges.find((r: any) => r.range.includes('content!'))?.values ?? [];
         const contactRows = ranges.find((r: any) => r.range.includes('contact!'))?.values ?? [];
 
         return {
-            content: this.mapContent(contentRows),
             contact: this.mapContact(contactRows),
             translations: {},
         };
@@ -149,25 +133,6 @@ export class GoogleSheetsService {
         return out;
     }
 
-    private mapContent(rows: string[][]): SheetContent {
-        const out: SheetContent = {
-            hero_tagline: '',
-            about_title: '',
-            about_text: '',
-            cta_text: '',
-        };
-
-        for (const [key, value] of rows) {
-            if (!key) continue;
-
-            if (key in out) {
-                (out as any)[key] = value ?? '';
-            }
-        }
-
-        return out;
-    }
-
     private mapContact(rows: string[][]): ContactInfo {
         const out: ContactInfo = {
             studio_name: '',
@@ -175,7 +140,6 @@ export class GoogleSheetsService {
             address: '',
             email: '',
             phone: '',
-            open_hours: '',
         };
 
         for (const [key, value] of rows) {

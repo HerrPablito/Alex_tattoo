@@ -1,10 +1,3 @@
-export interface SheetContent {
-    hero_tagline: string;
-    about_title: string;
-    about_text: string;
-    cta_text: string;
-}
-
 export interface GalleryItem {
     id: number | string; // Changed to allow string ID from Cloudinary
     title: string;
@@ -34,12 +27,10 @@ export interface ContactInfo {
     address: string;
     email: string;
     phone: string;
-    open_hours: string;
-    [key: string]: string; // Allow dynamic keys for flexibility
+    [key: string]: string;
 }
 
 export interface SiteData {
-    content: SheetContent;
     contact: ContactInfo;
     translations: Record<string, Record<string, string>>;
 }

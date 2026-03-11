@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { GoogleSheetsService } from '../../services/google-sheets.service';
+import { TranslationService } from '../../services/translation.service';
 import { SeoService } from '../../services/seo.service';
 import { FormatTextPipe } from '../../pipes/format-text.pipe';
 import { MessageService } from 'primeng/api';
@@ -40,6 +41,9 @@ const MAX_FILES = 3;
 export class ContactComponent implements OnInit {
   private sheetService = inject(GoogleSheetsService);
   private seo = inject(SeoService);
+  private translation = inject(TranslationService);
+
+  t = (key: string) => this.translation.t(key);
 
   ngOnInit(): void {
     this.seo.update({

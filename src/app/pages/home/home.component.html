@@ -19,8 +19,7 @@
     </div>
     <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-black/60 z-10"></div>
 
-    <div class="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center gap-6"
-        *ngIf="content$ | async as content">
+    <div class="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center gap-6">
         <h1 class="text-6xl md:text-8xl font-serif font-bold text-white tracking-widest leading-none"
             style="text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
             ALEX TATTOO
@@ -30,12 +29,12 @@
             GÖTEBORG
         </h4>
         <p class="google-sheet-text text-xl md:text-2xl text-brand-white/80 font-light tracking-wide max-w-2xl"
-            [innerHTML]="(content.hero_tagline || 'Dark art. Clean lines. Timeless ink.') | formatText">
+            [innerHTML]="t('hero_tagline') | formatText">
         </p>
         <div class="flex gap-4 mt-8">
-            <a routerLink="/kontakt" pButton label="KONTAKTA MIG"
+            <a routerLink="/kontakt" pButton [label]="t('home_cta_contact')"
                 class="p-button-outlined p-button-warning !border-brand-gold !text-brand-gold hover:!bg-brand-gold hover:!text-black !rounded-full !px-8 !py-3 !font-bold transition-all text-lg"></a>
-            <a routerLink="/galleri" pButton label="SE BILDER"
+            <a routerLink="/galleri" pButton [label]="t('home_cta_gallery')"
                 class="p-button-text !text-white hover:!text-brand-gold !px-8 !py-3 transition-colors text-lg"></a>
         </div>
     </div>
@@ -44,7 +43,7 @@
 <!-- About Section -->
 <section class="py-24 bg-brand-black">
     <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center" *ngIf="content$ | async as content">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="relative">
                 <div class="absolute -inset-4 rounded-sm z-0 translate-x-2 translate-y-2">
                 </div>
@@ -56,10 +55,10 @@
             <div class="flex flex-col gap-6">
                 <span class="text-brand-gold text-sm tracking-[0.2em] font-bold uppercase">Artist</span>
                 <h2 class="google-sheet-text text-4xl md:text-5xl font-serif font-bold text-white"
-                    [innerHTML]="(content.about_title || 'Om Alex') | formatText">
+                    [innerHTML]="t('about_title') | formatText">
                 </h2>
                 <p class="google-sheet-text text-brand-white/70 text-lg leading-relaxed font-light"
-                    [innerHTML]="(content.about_text || 'Alex är en tatuerare specialiserad på blackwork och fineline. Med över 10 års erfarenhet skapar han unika verk som håller livet ut.') | formatText">
+                    [innerHTML]="t('about_text') | formatText">
                 </p>
             </div>
         </div>
@@ -71,7 +70,7 @@
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
             <span class="text-brand-gold text-sm tracking-[0.2em] font-bold uppercase block mb-4">Portfolio</span>
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white">UTVALDA VERK</h2>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white">{{ t('home_featured') }}</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -127,7 +126,7 @@
         </p-dialog>
 
         <div class="text-center mt-16">
-            <a routerLink="/galleri" pButton label="SE HELA PORTFOLION"
+            <a routerLink="/galleri" pButton [label]="t('home_view_all')"
                 class="p-button-outlined p-button-warning !border-brand-gold !text-brand-gold hover:!bg-brand-gold hover:!text-black !rounded-full !px-8 !py-3 !font-bold transition-all text-sm tracking-widest"></a>
         </div>
     </div>
