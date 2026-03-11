@@ -3,8 +3,8 @@
 
         <!-- Header -->
         <div class="text-center mb-16">
-            <h1 class="text-5xl md:text-7xl font-serif font-bold tracking-widest text-white mb-4">GALLERI</h1>
-            <p class="text-brand-white/60 text-lg">Utforska mina senaste tatueringar och skisser.</p>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold tracking-widest text-white mb-4">{{ t('gallery_title') }}</h1>
+            <p class="text-brand-white/60 text-lg">{{ t('gallery_subtitle') }}</p>
         </div>
 
         <!-- Loading -->
@@ -24,7 +24,7 @@
             <p-iconField iconPosition="left" class="w-full md:w-auto">
                 <p-inputIcon styleClass="pi pi-search" />
                 <input type="text" pInputText [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)"
-                    placeholder="Sök..."
+                    [placeholder]="t('gallery_search')"
                     class="w-full md:w-64 !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold !pl-10" />
             </p-iconField>
 
@@ -50,7 +50,7 @@
             </button>
             <button *ngIf="activeTags().length > 0" (click)="activeTags.set([])"
                 class="px-4 py-2 rounded-full border border-red-900/30 text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-all text-sm">
-                <i class="pi pi-times mr-1 text-xs"></i> Rensa filter
+                <i class="pi pi-times mr-1 text-xs"></i> {{ t('gallery_clear') }}
             </button>
         </div>
 
@@ -65,15 +65,14 @@
 
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <span class="text-brand-gold text-xs uppercase tracking-wider mb-2 font-bold">{{ item.category
-                        }}</span>
+                    <span class="text-brand-gold text-xs uppercase tracking-wider mb-2 font-bold">{{ item.category }}</span>
                     <h3 class="text-xl font-serif font-bold text-white">{{ item.title }}</h3>
                 </div>
             </div>
             } @empty {
             <div class="col-span-full text-center py-24 text-brand-white/40">
                 <i class="pi pi-images text-4xl mb-4 block"></i>
-                <p>Inga bilder hittades.</p>
+                <p>{{ t('gallery_empty') }}</p>
             </div>
             }
         </div>
@@ -82,7 +81,7 @@
     </div>
 
     <div class="text-center mt-16 pb-8 text-brand-white/50 text-base">
-        Fler tatueringar hittar du på min
+        {{ t('gallery_instagram') }}
         <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ=="
             target="_blank" rel="noopener noreferrer"
             class="text-brand-gold hover:text-white underline underline-offset-4 transition-colors font-medium">
@@ -119,7 +118,7 @@
             <h2 class="text-4xl font-serif font-bold text-white mb-6">{{ item.title }}</h2>
 
             <div class="mt-auto">
-                <button type="button" (click)="bookSimilar(item)" pButton label="JAG VILL HA NÅGOT LIKNANDE"
+                <button type="button" (click)="bookSimilar(item)" pButton [label]="t('gallery_book')"
                     class="w-full p-button-outlined p-button-warning !border-brand-gold !text-brand-gold hover:!bg-brand-gold hover:!text-black !font-bold"></button>
             </div>
         </div>

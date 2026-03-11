@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SeoService } from '../../services/seo.service';
 import { CloudinaryService } from '../../services/cloudinary.service';
+import { TranslationService } from '../../services/translation.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -65,6 +66,9 @@ export class GalleryComponent implements OnInit {
   private cloudinaryService = inject(CloudinaryService);
   private seo = inject(SeoService);
   private router = inject(Router);
+  private translation = inject(TranslationService);
+
+  t = (key: string) => this.translation.t(key);
 
   ngOnInit(): void {
     this.seo.update({

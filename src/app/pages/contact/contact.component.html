@@ -15,10 +15,9 @@
                 <div>
                     <span class="text-brand-gold text-sm tracking-[0.2em] font-bold uppercase mb-4 block">Get In
                         Touch</span>
-                    <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6">KONTAKT</h1>
+                    <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6">{{ t('nav_contact') }}</h1>
                     <p class="text-brand-white/70 text-lg leading-relaxed max-w-lg">
-                        Redo för din nästa tatuering? Fyll i formuläret eller besök studion.
-                        Jag svarar oftast inom 24 timmar.
+                        {{ t('contact_subtitle') }}
                     </p>
                 </div>
 
@@ -50,7 +49,7 @@
 
             <!-- Form Side -->
             <div class="bg-brand-dark p-8 md:p-12 rounded-lg border border-brand-gray/20 shadow-2xl">
-                <h2 class="text-3xl font-serif font-bold text-white mb-8">Skicka förfrågan</h2>
+                <h2 class="text-3xl font-serif font-bold text-white mb-8">{{ t('contact_send') }}</h2>
 
                 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
 
@@ -62,7 +61,7 @@
                             <p-floatLabel>
                                 <input id="name" type="text" pInputText formControlName="name"
                                     class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
-                                <label for="name" class="!text-brand-white/50">Namn *</label>
+                                <label for="name" class="!text-brand-white/50">{{ t('form_name') }} *</label>
                             </p-floatLabel>
                             <small *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
                                 class="text-red-400 text-xs">Namn krävs.</small>
@@ -73,7 +72,7 @@
                             <p-floatLabel>
                                 <input id="email" type="email" pInputText formControlName="email"
                                     class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
-                                <label for="email" class="!text-brand-white/50">Email *</label>
+                                <label for="email" class="!text-brand-white/50">{{ t('form_email') }} *</label>
                             </p-floatLabel>
                             <small *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
                                 class="text-red-400 text-xs">Giltig e-postadress krävs.</small>
@@ -84,7 +83,7 @@
                             <p-floatLabel>
                                 <input id="phone" type="tel" pInputText formControlName="phone"
                                     class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
-                                <label for="phone" class="!text-brand-white/50">Telefon *</label>
+                                <label for="phone" class="!text-brand-white/50">{{ t('form_phone') }} *</label>
                             </p-floatLabel>
                             <small *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched"
                                 class="text-red-400 text-xs">Telefonnummer krävs.</small>
@@ -100,7 +99,7 @@
                             <p-floatLabel>
                                 <input id="placement" type="text" pInputText formControlName="placement"
                                     class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
-                                <label for="placement" class="!text-brand-white/50">Placering på kroppen *</label>
+                                <label for="placement" class="!text-brand-white/50">{{ t('form_placement') }} *</label>
                             </p-floatLabel>
                             <small
                                 *ngIf="contactForm.get('placement')?.invalid && contactForm.get('placement')?.touched"
@@ -112,8 +111,7 @@
                             <p-floatLabel>
                                 <input id="size" type="text" pInputText formControlName="size"
                                     class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3" />
-                                <label for="size" class="!text-brand-white/50">Ungefärlig storlek (t.ex. 10×10 cm)
-                                    *</label>
+                                <label for="size" class="!text-brand-white/50">{{ t('form_size') }} *</label>
                             </p-floatLabel>
                             <small *ngIf="contactForm.get('size')?.invalid && contactForm.get('size')?.touched"
                                 class="text-red-400 text-xs">Storlek krävs.</small>
@@ -124,7 +122,7 @@
                             <p-floatLabel>
                                 <textarea id="description" rows="5" pInputTextarea formControlName="description"
                                     class="w-full !bg-brand-gray !border-brand-gray/50 !text-white focus:!border-brand-gold py-3"></textarea>
-                                <label for="description" class="!text-brand-white/50">Motivbeskrivning *</label>
+                                <label for="description" class="!text-brand-white/50">{{ t('form_description') }} *</label>
                             </p-floatLabel>
                             <small
                                 *ngIf="contactForm.get('description')?.invalid && contactForm.get('description')?.touched"
@@ -275,7 +273,7 @@
                     </div>
 
                     <!-- ── Skicka ── -->
-                    <button pButton type="submit" [label]="isSubmitting ? 'SKICKAR...' : 'SKICKA FÖRFRÅGAN'"
+                    <button pButton type="submit" [label]="isSubmitting ? t('contact_sending') : t('contact_send')"
                         [icon]="isSubmitting ? 'pi pi-spin pi-spinner' : 'pi pi-send'"
                         [disabled]="isSubmitting || !contactForm.get('age18')?.value || !contactForm.get('gdpr')?.value"
                         class="p-button-warning !bg-brand-gold !text-black !border-none !font-bold !py-4 hover:!bg-white hover:!text-brand-black transition-all mt-2 disabled:!opacity-40 disabled:!cursor-not-allowed">
