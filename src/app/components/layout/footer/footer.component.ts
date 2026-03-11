@@ -50,7 +50,7 @@ import { FormatTextPipe } from '../../../pipes/format-text.pipe';
           <div class="flex flex-col gap-4">
              <h4 class="text-lg font-bold text-brand-gold uppercase tracking-wider">{{ t('footer_hours') }}</h4>
              <p class="google-sheet-text text-brand-white/80" [innerHTML]="t('open_hours') | formatText"></p>
-             <p class="text-brand-white/50 text-sm italic mt-4">Endast tidsbokning.</p>
+             <p class="text-brand-white/50 text-sm italic mt-4">{{ t('footer_booking_only') }}</p>
 
              <div class="mt-4">
                 <a routerLink="/contact" class="inline-block border border-brand-gold text-brand-gold px-6 py-2 rounded-full hover:bg-brand-gold hover:text-black transition-all uppercase text-sm tracking-wide font-bold">
