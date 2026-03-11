@@ -41,6 +41,7 @@ export interface ContactInfo {
 export interface SiteData {
     content: SheetContent;
     contact: ContactInfo;
+    translations: Record<string, Record<string, string>>;
 }
 
 export interface GoogleSheetResponse {

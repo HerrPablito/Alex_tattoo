@@ -56,7 +56,8 @@ export class GoogleSheetsService {
             const params = new HttpParams()
                 .set('key', this.apiKey)
                 .append('ranges', 'content!A:B')
-                .append('ranges', 'contact!A:B');
+                .append('ranges', 'contact!A:B')
+                .append('ranges', 'translations!A:C');
 
             return this.http.get<any>(this.baseUrl, { params }).pipe(
                 map((res) => this.mapResponse(res)),
@@ -92,10 +93,15 @@ export class GoogleSheetsService {
         this.siteData$ = undefined;
     }
 
+    getTranslations(): Observable<Record<string, Record<string, string>>> {
+        return this.loadAll().pipe(map((d) => d.translations));
+    }
+
     private buildMock(): SiteData {
         return {
             content: this.mockContent,
             contact: this.mockContact,
+            translations: {},
         };
     }
 
@@ -105,11 +111,22 @@ export class GoogleSheetsService {
 
         const contentRows = ranges.find((r: any) => r.range.includes('content!'))?.values ?? [];
         const contactRows = ranges.find((r: any) => r.range.includes('contact!'))?.values ?? [];
+        const translationRows = ranges.find((r: any) => r.range.includes('translations!'))?.values ?? [];
 
         return {
             content: this.mapContent(contentRows),
             contact: this.mapContact(contactRows),
+            translations: this.mapTranslations(translationRows),
         };
+    }
+
+    private mapTranslations(rows: string[][]): Record<string, Record<string, string>> {
+        const out: Record<string, Record<string, string>> = {};
+        for (const [key, sv, en] of rows) {
+            if (!key) continue;
+            out[key] = { sv: sv ?? '', en: en ?? sv ?? '' };
+        }
+        return out;
     }
 
     private mapContent(rows: string[][]): SheetContent {

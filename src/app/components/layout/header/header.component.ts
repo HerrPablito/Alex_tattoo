@@ -4,11 +4,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { DrawerModule } from 'primeng/drawer';
 import { RippleModule } from 'primeng/ripple';
+import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, ButtonModule, DrawerModule, RippleModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, ButtonModule, DrawerModule, RippleModule, LanguageSwitcherComponent],
   template: `
     <header class="fixed top-0 left-0 w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-brand-gray/20">
       <div class="container mx-auto px-4 h-20 flex items-center justify-between">
@@ -23,6 +24,7 @@ import { RippleModule } from 'primeng/ripple';
           <a routerLink="/gallery" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">BILDER</a>
           <a routerLink="/contact" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">KONTAKT</a>
           <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" pButton icon="pi pi-instagram" class="p-button-text p-button-rounded text-white hover:text-brand-gold"></a>
+          <app-language-switcher />
         </nav>
 
         <!-- Mobile Menu Button -->
@@ -45,10 +47,13 @@ import { RippleModule } from 'primeng/ripple';
           <a (click)="visible = false" routerLink="/contact" routerLinkActive="text-brand-gold" class="text-lg font-medium text-white hover:text-brand-gold transition-colors">KONTAKT</a>
         </nav>
 
-        <div class="mt-auto flex gap-4 pt-8 border-t border-brand-gray/20">
+        <div class="mt-auto pt-8 border-t border-brand-gray/20 flex flex-col gap-4">
+          <app-language-switcher />
+          <div class="flex gap-4">
             <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-instagram"></i></a>
             <a href="https://www.facebook.com/share/18QZXEdzWJ/?mibextid=wwXIfr" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-facebook"></i></a>
             <a href="https://www.tiktok.com/@axst_tattoos?_r=1&_t=ZN-94Ln8LsEVNu" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-tiktok"></i></a>
+          </div>
         </div>
       </div>
     </p-drawer>
