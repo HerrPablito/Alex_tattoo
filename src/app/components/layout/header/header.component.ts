@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { DrawerModule } from 'primeng/drawer';
 import { RippleModule } from 'primeng/ripple';
 import { LanguageSwitcherComponent } from '../../language-switcher/language-switcher.component';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-header',
@@ -20,9 +21,9 @@ import { LanguageSwitcherComponent } from '../../language-switcher/language-swit
 
         <!-- Desktop Menu -->
         <nav class="hidden md:flex items-center gap-8">
-          <a routerLink="/" routerLinkActive="text-brand-gold" [routerLinkActiveOptions]="{exact: true}" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">HOME</a>
-          <a routerLink="/gallery" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">BILDER</a>
-          <a routerLink="/contact" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">KONTAKT</a>
+          <a routerLink="/" routerLinkActive="text-brand-gold" [routerLinkActiveOptions]="{exact: true}" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">{{ t('nav_home') }}</a>
+          <a routerLink="/gallery" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">{{ t('nav_gallery') }}</a>
+          <a routerLink="/contact" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">{{ t('nav_contact') }}</a>
           <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" pButton icon="pi pi-instagram" class="p-button-text p-button-rounded text-white hover:text-brand-gold"></a>
           <app-language-switcher />
         </nav>
@@ -42,9 +43,9 @@ import { LanguageSwitcherComponent } from '../../language-switcher/language-swit
         </div>
         
         <nav class="flex flex-col gap-6">
-          <a (click)="visible = false" routerLink="/" routerLinkActive="text-brand-gold" [routerLinkActiveOptions]="{exact: true}" class="text-lg font-medium text-white hover:text-brand-gold transition-colors">HOME</a>
-          <a (click)="visible = false" routerLink="/gallery" routerLinkActive="text-brand-gold" class="text-lg font-medium text-white hover:text-brand-gold transition-colors">BILDER</a>
-          <a (click)="visible = false" routerLink="/contact" routerLinkActive="text-brand-gold" class="text-lg font-medium text-white hover:text-brand-gold transition-colors">KONTAKT</a>
+          <a (click)="visible = false" routerLink="/" routerLinkActive="text-brand-gold" [routerLinkActiveOptions]="{exact: true}" class="text-lg font-medium text-white hover:text-brand-gold transition-colors">{{ t('nav_home') }}</a>
+          <a (click)="visible = false" routerLink="/gallery" routerLinkActive="text-brand-gold" class="text-lg font-medium text-white hover:text-brand-gold transition-colors">{{ t('nav_gallery') }}</a>
+          <a (click)="visible = false" routerLink="/contact" routerLinkActive="text-brand-gold" class="text-lg font-medium text-white hover:text-brand-gold transition-colors">{{ t('nav_contact') }}</a>
         </nav>
 
         <div class="mt-auto pt-8 border-t border-brand-gray/20 flex flex-col gap-4">
@@ -67,4 +68,6 @@ import { LanguageSwitcherComponent } from '../../language-switcher/language-swit
 })
 export class HeaderComponent {
   visible = false;
+  private translation = inject(TranslationService);
+  t = (key: string) => this.translation.t(key);
 }
