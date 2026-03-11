@@ -3,7 +3,7 @@ export default {
     const url = new URL(request.url);
 
     const corsHeaders = {
-      "Access-Control-Allow-Origin": "https://beta.axst.se",
+      "Access-Control-Allow-Origin": "https://axst.se",
       "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     };
