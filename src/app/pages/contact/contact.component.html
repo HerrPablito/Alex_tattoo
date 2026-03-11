@@ -23,7 +23,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-brand-gray p-6 rounded-sm border border-brand-gray/30">
-                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">Adress</h3>
+                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">{{ t('contact_address_label') }}</h3>
                         <p class="google-sheet-text text-white" [innerHTML]="contact.studio_name | formatText"></p>
                         <p class="google-sheet-text text-white/70" [innerHTML]="contact.address | formatText"></p>
                         <p class="google-sheet-text text-white/70" [innerHTML]="contact.city | formatText"></p>
@@ -33,16 +33,16 @@
                         </a>
                     </div>
                     <div class="bg-brand-gray p-6 rounded-sm border border-brand-gray/30">
-                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">Kontakt</h3>
+                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">{{ t('contact_info_label') }}</h3>
                         <a [href]="'mailto:' + contact.email"
                             class="block text-white hover:text-brand-gold transition-colors mb-1">{{ contact.email
                             }}</a>
                             <img src="/images/Alex-stefani-tattooing.JPG" alt="Alex Tattoo Artist" loading="lazy" class="mt-4 w-full h-40 object-cover rounded-sm border border-brand-gray/30 shadow-lg">
                     </div>
                     <div class="bg-brand-gray p-6 rounded-sm border border-brand-gray/30 col-span-1 md:col-span-2">
-                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">Öppettider</h3>
+                        <h3 class="text-brand-gold font-bold uppercase tracking-wider mb-2 text-sm">{{ t('footer_hours') }}</h3>
                         <p class="google-sheet-text text-white" [innerHTML]="t('open_hours') | formatText"></p>
-                        <p class="text-white/50 text-xs mt-2 italic">Tidsbokning gäller för konsultationer.</p>
+                        <p class="text-white/50 text-xs mt-2 italic">{{ t('contact_booking_note') }}</p>
                     </div>
                 </div>
             </div>
