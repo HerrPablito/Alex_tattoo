@@ -118,8 +118,7 @@
             <h2 class="text-4xl font-serif font-bold text-white mb-6">{{ item.title }}</h2>
 
             <div class="mt-auto">
-                <button type="button" (click)="bookSimilar(item)" pButton [label]="t('gallery_book')"
-                    class="w-full p-button-outlined p-button-warning !border-brand-gold !text-brand-gold hover:!bg-brand-gold hover:!text-black !font-bold"></button>
+                <button type="button" (click)="bookSimilar(item)" class="w-full border border-brand-gold text-brand-gold py-2 rounded-full hover:bg-brand-gold hover:text-black transition-all uppercase text-sm tracking-wide font-bold">{{ t('gallery_book') }}</button>
             </div>
         </div>
     </div>
