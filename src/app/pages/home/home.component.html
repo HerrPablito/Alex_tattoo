@@ -32,10 +32,8 @@
             [innerHTML]="t('hero_tagline') | formatText">
         </p>
         <div class="flex gap-4 mt-8">
-            <a routerLink="/kontakt" pButton [label]="t('home_cta_contact')"
-                class="p-button-outlined p-button-warning !border-brand-gold !text-brand-gold hover:!bg-brand-gold hover:!text-black !rounded-full !px-8 !py-3 !font-bold transition-all text-lg"></a>
-            <a routerLink="/galleri" pButton [label]="t('home_cta_gallery')"
-                class="p-button-text !text-white hover:!text-brand-gold !px-8 !py-3 transition-colors text-lg"></a>
+            <a routerLink="/kontakt" class="inline-block border border-brand-gold text-brand-gold px-6 py-2 rounded-full hover:bg-brand-gold hover:text-black transition-all uppercase text-sm tracking-wide font-bold">{{ t('home_cta_contact') }}</a>
+            <a routerLink="/galleri" class="inline-block border border-brand-gold text-brand-gold px-6 py-2 rounded-full hover:bg-brand-gold hover:text-black transition-all uppercase text-sm tracking-wide font-bold">{{ t('home_cta_gallery') }}</a>
         </div>
     </div>
 </section>
@@ -126,8 +124,7 @@
         </p-dialog>
 
         <div class="text-center mt-16">
-            <a routerLink="/galleri" pButton [label]="t('home_view_all')"
-                class="p-button-outlined p-button-warning !border-brand-gold !text-brand-gold hover:!bg-brand-gold hover:!text-black !rounded-full !px-8 !py-3 !font-bold transition-all text-sm tracking-widest"></a>
+            <a routerLink="/galleri" class="inline-block border border-brand-gold text-brand-gold px-6 py-2 rounded-full hover:bg-brand-gold hover:text-black transition-all uppercase text-sm tracking-wide font-bold">{{ t('home_view_all') }}</a>
         </div>
     </div>
 </section>

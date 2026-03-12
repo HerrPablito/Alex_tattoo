@@ -53,19 +53,19 @@ import { FormatTextPipe } from '../../../pipes/format-text.pipe';
              <p class="text-brand-white/50 text-sm italic mt-4">{{ t('footer_booking_only') }}</p>
 
              <div class="mt-4">
-                <a routerLink="/contact" class="inline-block border border-brand-gold text-brand-gold px-6 py-2 rounded-full hover:bg-brand-gold hover:text-black transition-all uppercase text-sm tracking-wide font-bold">
+                <a routerLink="/kontakt" class="inline-block border border-brand-gold text-brand-gold px-6 py-2 rounded-full hover:bg-brand-gold hover:text-black transition-all uppercase text-sm tracking-wide font-bold">
                     {{ t('footer_book') }}
                 </a>
              </div>
           </div>
 
         </div>
-      </div>
 
-      <!-- Copyright -->
-      <div class="border-t border-brand-gray/10 mt-12 pt-8 text-center text-brand-white/30 text-xs flex flex-col items-center gap-2">
-        <p>&copy; {{ currentYear }} Alex Tattoo. {{ t('footer_copyright') }}</p>
-        <a routerLink="/gdpr" class="hover:text-brand-gold transition-colors underline underline-offset-4 text-[10px] uppercase tracking-widest text-brand-white/50">{{ t('footer_gdpr_link') }}</a>
+        <!-- Copyright -->
+        <div class="border-t border-brand-gray/10 mt-12 pt-8 text-center text-brand-white/30 text-xs flex flex-col items-center gap-2 relative z-10">
+          <p>&copy; {{ currentYear }} Alex Tattoo. {{ t('footer_copyright') }}</p>
+          <a routerLink="/gdpr" class="hover:text-brand-gold transition-colors underline underline-offset-4 text-[10px] uppercase tracking-widest text-brand-white/50">{{ t('footer_gdpr_link') }}</a>
+        </div>
       </div>
     </footer>
   `

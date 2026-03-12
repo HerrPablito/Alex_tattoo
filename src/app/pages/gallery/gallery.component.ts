@@ -94,11 +94,11 @@ export class GalleryComponent implements OnInit {
   selectedImage = signal<GalleryItem | null>(null);
   dialogVisible = signal(false);
 
-  sortOptions = [
-    { label: 'Nyast först', value: 'newest' },
-    { label: 'Äldst först', value: 'oldest' },
-    { label: 'Titel (A-Ö)', value: 'az' }
-  ];
+  sortOptions = computed(() => [
+    { label: this.t('gallery_sort_newest'), value: 'newest' },
+    { label: this.t('gallery_sort_oldest'), value: 'oldest' },
+    { label: this.t('gallery_sort_az'), value: 'az' }
+  ]);
 
   // Computed: Extract unique tags from all items
   allTags = computed(() => {
