@@ -2,16 +2,8 @@ interface Env {
     RESEND_API_KEY: string;
 }
 
-interface ContactPayload {
-    name: string;
-    email: string;
-    phone: string;
-    placement: string;
-    size: string;
-    description: string;
-    consultation: string;
-    consultationTime?: string;
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type PagesFunction<E = Record<string, unknown>> = (ctx: { request: Request; env: E; params: Record<string, string> }) => Response | Promise<Response>;
 
 const CORS_HEADERS = {
     'Access-Control-Allow-Origin': '*',
@@ -23,10 +15,10 @@ export const onRequestOptions: PagesFunction = async () =>
     new Response(null, { status: 204, headers: CORS_HEADERS });
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-    let body: ContactPayload;
+    let formData: FormData;
 
     try {
-        body = await request.json() as ContactPayload;
+        formData = await request.formData();
     } catch {
         return Response.json(
             { error: 'Ogiltig förfrågan.' },
@@ -34,7 +26,14 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
         );
     }
 
-    const { name, email, phone, placement, size, description, consultation, consultationTime } = body;
+    const name         = formData.get('name')         as string | null;
+    const email        = formData.get('email')        as string | null;
+    const phone        = formData.get('phone')        as string | null;
+    const placement    = formData.get('placement')    as string | null;
+    const size         = formData.get('size')         as string | null;
+    const description  = formData.get('description')  as string | null;
+    const consultation = formData.get('consultation') as string | null;
+    const consultationTime = formData.get('consultationTime') as string | null;
 
     if (!name || !email || !phone || !placement || !size || !description || !consultation) {
         return Response.json(
@@ -59,6 +58,16 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
         description,
     ].join('\n');
 
+    // Build attachments from uploaded files
+    const attachments: { filename: string; content: string }[] = [];
+    const fileEntries = formData.getAll('files') as File[];
+    for (const file of fileEntries) {
+        if (!(file instanceof File) || file.size === 0) continue;
+        const buffer = await file.arrayBuffer();
+        const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+        attachments.push({ filename: file.name, content: base64 });
+    }
+
     const resendRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -66,13 +75,12 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            // Byt ut mot din verifierade Resend-domän, t.ex. noreply@alextattoo.se
-            from: 'Alex Tattoo <onboarding@resend.dev>',
-            // Byt ut mot din faktiska e-postadress
-            to: ['din@email.se'],
+            from: 'Alex Tattoo <noreply@axst.se>',
+            to: ['axsttattoos@gmail.com'],
             reply_to: email,
             subject: `Ny förfrågan från ${name}`,
             text: emailText,
+            ...(attachments.length > 0 && { attachments }),
         }),
     });
 
