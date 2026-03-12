@@ -24,7 +24,7 @@ import { TranslationService } from '../../../services/translation.service';
           <a routerLink="/" routerLinkActive="text-brand-gold" [routerLinkActiveOptions]="{exact: true}" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">{{ t('nav_home') }}</a>
           <a routerLink="/gallery" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">{{ t('nav_gallery') }}</a>
           <a routerLink="/contact" routerLinkActive="text-brand-gold" class="text-sm font-medium tracking-wide hover:text-brand-gold transition-colors">{{ t('nav_contact') }}</a>
-          <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" pButton icon="pi pi-instagram" class="p-button-text p-button-rounded text-white hover:text-brand-gold"></a>
+          <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" class="w-8 h-8 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all text-sm"><i class="pi pi-instagram"></i></a>
           <app-language-switcher />
         </nav>
 
@@ -51,9 +51,9 @@ import { TranslationService } from '../../../services/translation.service';
         <div class="mt-auto pt-8 border-t border-brand-gray/20 flex flex-col gap-4">
           <app-language-switcher />
           <div class="flex gap-4">
-            <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-instagram"></i></a>
-            <a href="https://www.facebook.com/share/18QZXEdzWJ/?mibextid=wwXIfr" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-facebook"></i></a>
-            <a href="https://www.tiktok.com/@axst_tattoos?_r=1&_t=ZN-94Ln8LsEVNu" target="_blank" class="text-white hover:text-brand-gold text-xl"><i class="pi pi-tiktok"></i></a>
+            <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" class="w-10 h-10 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all"><i class="pi pi-instagram"></i></a>
+            <a href="https://www.facebook.com/share/18QZXEdzWJ/?mibextid=wwXIfr" target="_blank" class="w-10 h-10 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all"><i class="pi pi-facebook"></i></a>
+            <a href="https://www.tiktok.com/@axst_tattoos?_r=1&_t=ZN-94Ln8LsEVNu" target="_blank" class="w-10 h-10 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all"><i class="pi pi-tiktok"></i></a>
           </div>
         </div>
       </div>

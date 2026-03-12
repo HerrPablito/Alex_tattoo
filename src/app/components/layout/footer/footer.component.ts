@@ -22,13 +22,13 @@ import { FormatTextPipe } from '../../../pipes/format-text.pipe';
               <span class="google-sheet-text" [innerHTML]="t('hero_tagline') | formatText"></span>
             </p>
             <div class="flex gap-4 mt-2">
-              <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-brand-gray flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
+              <a href="https://www.instagram.com/axst_tattoos?igsh=MTZkb2d0OW82dDN3cQ==" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
                 <i class="pi pi-instagram"></i>
               </a>
-              <a href="https://www.facebook.com/share/18QZXEdzWJ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-brand-gray flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
+              <a href="https://www.facebook.com/share/18QZXEdzWJ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
                 <i class="pi pi-facebook"></i>
               </a>
-              <a href="https://www.tiktok.com/@axst_tattoos?_r=1&_t=ZN-94Ln8LsEVNu" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-brand-gray flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
+              <a href="https://www.tiktok.com/@axst_tattoos?_r=1&_t=ZN-94Ln8LsEVNu" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all">
                 <i class="pi pi-tiktok"></i>
               </a>
             </div>
