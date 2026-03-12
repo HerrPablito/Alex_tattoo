@@ -127,7 +127,7 @@ export default {
         },
         body: JSON.stringify({
           from: "booking@axst.se",
-          to: ["thepablopaez@gmail.com"],
+          to: ["axsttattoos@gmail.com"],
           reply_to: email,
           subject: `Ny bokningsförfrågan från ${name}`,
           html: `
