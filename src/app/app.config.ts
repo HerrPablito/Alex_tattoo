@@ -7,14 +7,14 @@ import { MessageService } from 'primeng/api';
 import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration, withEventReplay, withNoHttpTransferCache } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'top' })),
     provideHttpClient(withFetch()),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withNoHttpTransferCache()),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
