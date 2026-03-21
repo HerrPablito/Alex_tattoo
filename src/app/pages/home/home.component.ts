@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, HostListener } from '@angular/core';
+import { Component, inject, OnInit, signal, computed, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -30,6 +30,12 @@ export class HomeComponent implements OnInit {
 
   loading = this.sheetService.loading;
   error = this.sheetService.error;
+
+  // Returns empty string if key 'banner' has no translation (t() falls back to the key itself)
+  bannerText = computed(() => {
+    const text = this.translation.t('banner');
+    return text === 'banner' ? '' : text;
+  });
 
   featuredGallery$ = this.cloudinaryService.getGallery().pipe(
     map(items => items.slice(0, 6))

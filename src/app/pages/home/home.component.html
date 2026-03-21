@@ -10,6 +10,16 @@
     <span>{{ error() }}</span>
 </div>
 
+<!-- Event Banner -->
+@if (bannerText()) {
+<section class="bg-brand-gold/10 border-b border-brand-gold/30 py-3 px-4">
+    <div class="container mx-auto flex items-center justify-center gap-3 text-center">
+        <i class="pi pi-map-marker text-brand-gold flex-shrink-0"></i>
+        <p class="text-brand-white/90 text-sm md:text-base leading-snug" [innerHTML]="bannerText() | formatText"></p>
+    </div>
+</section>
+}
+
 <!-- Hero Section -->
 <section class="relative h-[90vh] flex items-center justify-center overflow-hidden bg-brand-black">
     <div class="absolute inset-0 z-0 opacity-40">
